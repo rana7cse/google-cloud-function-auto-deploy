@@ -2,16 +2,17 @@ name: gcloud-function-deployment
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  job_id:
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: 'actions/checkout@v3'
-        -
-      - id: 'auth'
+
+      - name: Setup GCP Service Account
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-      - id: 'deploy'
+      - name: deploy cloud function
         uses: 'google-github-actions/deploy-cloud-functions@v0'
         with:
           name: 'test-function'
