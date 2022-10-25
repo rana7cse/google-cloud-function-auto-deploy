@@ -1,13 +1,18 @@
-name: learn-github-actions
+name: gcloud-function-deployment
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
+  job_id:
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: 'actions/checkout@v3'
+        -
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - id: 'deploy'
+        uses: 'google-github-actions/deploy-cloud-functions@v0'
+        with:
+          name: 'test-function'
+          runtime: 'nodejs16'
