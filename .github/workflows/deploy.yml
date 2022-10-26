@@ -15,5 +15,6 @@ jobs:
       - name: deploy cloud function
         uses: 'google-github-actions/deploy-cloud-functions@v0'
         with:
-          name: 'test-function'
+          name: 'testCloudFunction'
+          entry_point: 'testCloudFunction'
           runtime: 'nodejs16'
