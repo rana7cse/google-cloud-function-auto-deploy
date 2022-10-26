@@ -1,3 +1,3 @@
 exports.testCloudFunction = (req, res) => {
-  res.send("Running very well");
+  res.send("I changed again too see another deployment");
 }
